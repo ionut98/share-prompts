@@ -26,21 +26,21 @@ const Feed = () => {
     setSearchText(e.target.value);
   };
 
-  const fetchPosts = useCallback(async () => {
+  const fetchPrompts = useCallback(async () => {
     const response = await fetch("/api/prompt");
     const data = await response.json();
 
     setPrompts(data);
   }, []);
 
+  useEffect(() => {
+    fetchPrompts();
+  }, [fetchPrompts]);
+
   const handleTagClick = useCallback((tag) => {
     // Implement your logic to filter posts by tag here
     // Example: setPosts(posts.filter((post) => post.tags.includes(tag)));
   }, []);
-
-  useEffect(() => {
-    fetchPosts();
-  }, [fetchPosts]);
 
   return (
     <section className="feed">
