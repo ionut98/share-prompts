@@ -6,7 +6,6 @@ import Image from "next/image";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 import logo from "@public/assets/images/logo.svg";
-// import profileImage from "@public/assets/images/logo.svg";
 
 const Nav = () => {
   const { data: session } = useSession();
@@ -58,7 +57,9 @@ const Nav = () => {
               Sign Out
             </button>
 
-            <Link href="/profile">
+            <Link
+              href={`/profile?id=${session?.user.id}&name=${session?.user.name}`}
+            >
               <Image
                 src={session?.user?.image || logo}
                 width={37}
