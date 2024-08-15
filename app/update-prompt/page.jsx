@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
@@ -68,13 +68,15 @@ const EditPrompt = () => {
   }, [getPromptDetails, promptId]);
 
   return (
-    <Form
-      type="Edit"
-      post={prompt}
-      setPost={setPrompt}
-      submitting={submitting}
-      handleSubmit={updatePrompt}
-    />
+    <Suspense>
+      <Form
+        type="Edit"
+        post={prompt}
+        setPost={setPrompt}
+        submitting={submitting}
+        handleSubmit={updatePrompt}
+      />
+    </Suspense>
   );
 };
 
