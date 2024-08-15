@@ -15,8 +15,6 @@ const CreatePrompt = () => {
     tag: "",
   });
 
-  console.log(session, "<=== SESSION ===>");
-
   const createPrompt = useCallback(
     async (ev) => {
       ev.preventDefault();

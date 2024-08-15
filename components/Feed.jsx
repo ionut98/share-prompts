@@ -11,7 +11,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
         <PromptCard
           key={prompt._id}
           prompt={prompt}
-          // handleTagClick={handleTagClick}
+          handleTagClick={handleTagClick}
         />
       ))}
     </div>
@@ -37,10 +37,23 @@ const Feed = () => {
     fetchPrompts();
   }, [fetchPrompts]);
 
-  const handleTagClick = useCallback((tag) => {
-    // Implement your logic to filter posts by tag here
-    // Example: setPosts(posts.filter((post) => post.tags.includes(tag)));
+  const handleTagClick = useCallback((ev) => {
+    const tag = ev.target.innerHTML;
+    setSearchText(tag);
   }, []);
+
+  const filterCallback = useCallback(
+    (prompt) => {
+      const searchedText = searchText.toLowerCase();
+
+      return (
+        prompt.prompt.toLowerCase().includes(searchedText) ||
+        prompt.creator.username.toLowerCase().includes(searchedText) ||
+        prompt.tag.toLowerCase().includes(searchedText)
+      );
+    },
+    [searchText]
+  );
 
   return (
     <section className="feed">
@@ -53,10 +66,12 @@ const Feed = () => {
           required
           className="search_input peer"
         />
-        {/* <button type="submit">Search</button> */}
       </form>
 
-      <PromptCardList data={prompts} handleTagClick={handleTagClick} />
+      <PromptCardList
+        data={prompts.filter(filterCallback)}
+        handleTagClick={handleTagClick}
+      />
     </section>
   );
 };
