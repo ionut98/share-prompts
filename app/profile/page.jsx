@@ -4,6 +4,7 @@ import { Suspense, useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Profile from "@components/Profile";
+import Loading from "@components/Loading";
 
 const ProfilePage = () => {
   const router = useRouter();
