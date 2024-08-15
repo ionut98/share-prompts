@@ -4,7 +4,6 @@ import { Suspense, useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Profile from "@components/Profile";
-import Loading from "@components/Loading";
 
 const ProfilePage = () => {
   const router = useRouter();
@@ -50,15 +49,13 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <Suspense fallback={<Loading />}>
-      <Profile
-        name={name || "My"}
-        desc={`Welcome to ${name}'s personalized profile page`}
-        data={prompts}
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-      />
-    </Suspense>
+    <Profile
+      name={name || "My"}
+      desc={`Welcome to ${name}'s personalized profile page`}
+      data={prompts}
+      handleEdit={handleEdit}
+      handleDelete={handleDelete}
+    />
   );
 };
 

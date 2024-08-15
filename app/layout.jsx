@@ -1,7 +1,9 @@
 import "@styles/globals.css";
 
+import { Suspense } from "react";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
+import Loading from "@components/Loading";
 
 export const metadata = {
   title: "Promptly",
@@ -18,7 +20,7 @@ const RootLayout = ({ children }) => {
           </div>
           <main className="app">
             <Nav />
-            {children}
+            <Suspense fallback={<Loading />}>{children}</Suspense>
           </main>
         </Provider>
       </body>
