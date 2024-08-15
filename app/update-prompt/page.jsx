@@ -4,6 +4,7 @@ import { Suspense, useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
+import Loading from "@components/Loading";
 
 const EditPrompt = () => {
   const router = useRouter();
@@ -68,7 +69,7 @@ const EditPrompt = () => {
   }, [getPromptDetails, promptId]);
 
   return (
-    <Suspense>
+    <Suspense fallback={<Loading />}>
       <Form
         type="Edit"
         post={prompt}

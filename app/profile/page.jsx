@@ -1,13 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Profile from "@components/Profile";
 
 const ProfilePage = () => {
-  const { data: session } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
   const userId = searchParams.get("id");
@@ -51,13 +49,15 @@ const ProfilePage = () => {
   }, []);
 
   return (
-    <Profile
-      name={name || "My"}
-      desc={`Welcome to ${name}'s personalized profile page`}
-      data={prompts}
-      handleEdit={handleEdit}
-      handleDelete={handleDelete}
-    />
+    <Suspense fallback={<Loading />}>
+      <Profile
+        name={name || "My"}
+        desc={`Welcome to ${name}'s personalized profile page`}
+        data={prompts}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+      />
+    </Suspense>
   );
 };
 
